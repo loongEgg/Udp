@@ -1,0 +1,33 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>netcoreapp3.1;net45</TargetFrameworks>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Authors>LoongEgg</Authors>
+    <Description>Bindable UDP Client can used in WPF as ViewModel of MVVM. See demo in github reposity</Description>
+    <Copyright>LoongEgg</Copyright>
+    <PackageReleaseNotes>Bug fix:
+  1.Fix the UdpSender Bug: Do not assign the IsOpen property to false when closed</PackageReleaseNotes>
+    <AssemblyVersion>0.1.1.0</AssemblyVersion>
+    <FileVersion>0.1.1.0</FileVersion>
+    <Version>0.1.1</Version>
+    <RepositoryUrl>https://github.com/loongEgg/Udp.git</RepositoryUrl>
+    <PackageProjectUrl>https://github.com/loongEgg/Udp</PackageProjectUrl>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|netcoreapp3.1|AnyCPU'">
+    <WarningLevel>5</WarningLevel>
+    <DocumentationFile>C:\Users\King\source\repos\LoongEgg.Udp\LoongEgg.Udp\LoongEgg.Udp.xml</DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net45|AnyCPU'">
+    <WarningLevel>5</WarningLevel>
+    <DocumentationFile>C:\Users\King\source\repos\LoongEgg.Udp\LoongEgg.Udp\LoongEgg.Udp.xml</DocumentationFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="LoongEgg.Core" Version="1.0.0" />
+    <PackageReference Include="LoongEgg.Log" Version="0.1.1" />
+    <PackageReference Include="LoongEgg.SharpExtensions" Version="1.0.0" />
+  </ItemGroup>
+
+</Project>
