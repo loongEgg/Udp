@@ -34,6 +34,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="LoongEgg.Converters, Version=1.2.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\LoongEgg.Converters.1.2.3\lib\net45\LoongEgg.Converters.dll</HintPath>
+    </Reference>
     <Reference Include="LoongEgg.Core, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\LoongEgg.Core.1.0.0\lib\net45\LoongEgg.Core.dll</HintPath>
     </Reference>
@@ -46,8 +49,8 @@
     <Reference Include="LoongEgg.SharpExtensions, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\LoongEgg.SharpExtensions.1.0.0\lib\net45\LoongEgg.SharpExtensions.dll</HintPath>
     </Reference>
-    <Reference Include="LoongEgg.Udp, Version=0.1.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\LoongEgg.Udp.0.1.0\lib\net45\LoongEgg.Udp.dll</HintPath>
+    <Reference Include="LoongEgg.Udp, Version=0.1.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\LoongEgg.Udp.0.1.1\lib\net45\LoongEgg.Udp.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.Composition" />

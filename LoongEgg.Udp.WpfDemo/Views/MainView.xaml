@@ -2,48 +2,92 @@
     x:Class="LoongEgg.Udp.WpfDemo.MainView"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:cvt="clr-namespace:LoongEgg.Converters;assembly=LoongEgg.Converters"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:LoongEgg.Udp.WpfDemo"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     Title="MainWindow"
     Width="800"
     Height="450"
+    FontFamily="Consolas"
     FontSize="22"
     mc:Ignorable="d">
     <Grid Margin="2" d:DataContext="{x:Static local:MainViewModel.Singleton}">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="auto" />
-            <RowDefinition Height="*" />
-        </Grid.RowDefinitions>
-        <StackPanel>
-            <TextBlock Text="远端" />
-            <local:ParameterBox Label="IP:" Value="{Binding Sender.IpRemote}" />
-            <local:ParameterBox Label="Port:" Value="{Binding Sender.PortRemote}" />
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
 
-            <TextBlock Text="本地" />
-            <local:ParameterBox Label="IP:" Value="{Binding Sender.IpLocal}" />
-
-        </StackPanel>
-
-        <Grid Grid.Row="1">
+        <!--  发送端  -->
+        <Grid Grid.Column="0">
             <Grid.RowDefinitions>
-                <RowDefinition Height="*" />
                 <RowDefinition Height="auto" />
+                <RowDefinition Height="*" />
             </Grid.RowDefinitions>
-            <TextBox Margin="2" Text="{Binding Sender.Buffer}" />
-            <Grid Grid.Row="1" Margin="2">
-                <Button
-                    Width="120"
-                    Height="30"
-                    HorizontalAlignment="Left"
-                    Command="{Binding OpenOrCloseCommand}"
-                    Content="Open" />
-                <Button
-                    Width="120"
-                    Height="30"
-                    HorizontalAlignment="Right"
-                    Command="{Binding SendCommand}"
-                    Content="Send" />
+            <StackPanel>
+                <TextBlock Text="远程" />
+                <local:ParameterBox Label="IP:" Value="{Binding Sender.IpRemote}" />
+                <local:ParameterBox Label="Port:" Value="{Binding Sender.PortRemote}" />
+
+                <TextBlock Margin="0,20,0,0" Text="本地" />
+                <local:ParameterBox Label="IP:" Value="{Binding Sender.IpLocal}" />
+
+            </StackPanel>
+
+            <Grid Grid.Row="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="auto" />
+                </Grid.RowDefinitions>
+                <TextBox Margin="2" Text="{Binding MessageToSend}" />
+                <Grid Grid.Row="1" Margin="2">
+                    <Button
+                        Width="120"
+                        Height="30"
+                        HorizontalAlignment="Left"
+                        Command="{Binding SenderOpenOrCloseCommand}"
+                        Content="{Binding Sender.IsOpen, Converter={cvt:FalseToOpenStringConverter}}" />
+                    <Button
+                        Width="120"
+                        Height="30"
+                        HorizontalAlignment="Right"
+                        Command="{Binding SenderSendCommand}"
+                        Content="Send" />
+                </Grid>
+            </Grid>
+        </Grid>
+
+        <!--  接收端  -->
+        <Grid Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <StackPanel>
+                <TextBlock Text="远程" />
+                <local:ParameterBox Label="IP:" Value="{Binding Listener.IpRemote}" />
+                <local:ParameterBox Label="Port:" Value="{Binding Listener.PortRemote}" />
+
+                <TextBlock Margin="0,20,0,0" Text="本地" />
+                <local:ParameterBox Label="IP:" Value="{Binding Listener.IpLocal}" />
+
+            </StackPanel>
+
+            <Grid Grid.Row="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="auto" />
+                </Grid.RowDefinitions>
+                <TextBox Margin="2" Text="{Binding MessageReceived}" />
+                <Grid Grid.Row="1" Margin="2">
+                    <Button
+                        Width="120"
+                        Height="30"
+                        HorizontalAlignment="Left"
+                        Command="{Binding ListenerOpenOrCloseCommand}"
+                        Content="{Binding Listener.IsOpen, Converter={cvt:FalseToOpenStringConverter}}" />
+
+                </Grid>
             </Grid>
         </Grid>
     </Grid>

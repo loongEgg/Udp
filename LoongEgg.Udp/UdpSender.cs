@@ -18,7 +18,7 @@ namespace LoongEgg.Udp
         /// 在控制台显示发送记录.[default]=true, set at ctor.
         /// </summary>
         /// <remarks>
-        ///     注意:置为true时会打开<see cref="Loggers.Console"/>并且使能log打印; 
+        ///     置为true时会打开<see cref="Loggers.Console"/>并且使能log打印; 
         ///     但是置为false时不会关闭<see cref="Loggers.Console"/>而只会禁止打印输出.
         /// </remarks>
         public static bool LogEnabled
@@ -34,6 +34,7 @@ namespace LoongEgg.Udp
             }
         }
         private static bool _LogEnabled;
+
         private Socket _Socket;
          
         static UdpSender() { LogEnabled = true; }
@@ -71,7 +72,7 @@ namespace LoongEgg.Udp
             {
                 if (LogEnabled)
                 {
-                    Logger.Erro($"Udp open error: {ex.Message}");
+                    Logger.Erro($"Udp sender open error: {ex.Message}");
                 }
                 Close();
                 throw ex;

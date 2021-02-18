@@ -22,16 +22,33 @@ namespace LoongEgg.Udp.WpfDemo
         public UdpListener Listener { get; set; }
         public UdpSender Sender { get; set; }
 
-        public ICommand SendCommand { get; }
-        public ICommand OpenOrCloseCommand { get; }
+        public string MessageToSend
+        {
+            get { return _MessageToSend; }
+            set { SetProperty(ref _MessageToSend, value); }
+        }
+        private string _MessageToSend = string.Empty;
+         
+        public string MessageReceived
+        {
+            get { return _MessageReceived; }
+            set { SetProperty(ref _MessageReceived, value); }
+        }
+        private string _MessageReceived = string.Empty;
+         
+        public ICommand SenderSendCommand { get; }
+        public ICommand SenderOpenOrCloseCommand { get; }
+        public ICommand ListenerOpenOrCloseCommand { get; }
 
         MainViewModel()
         {
             Listener = new UdpListener();
             Sender = new UdpSender();
 
-            SendCommand = new DelegateCommand(() => Sender?.Send(Sender.Buffer), () => Sender != null && Sender.IsOpen);
-            OpenOrCloseCommand = new DelegateCommand(
+            Listener.Received += (s, e) => MessageReceived = e.Message;
+
+            SenderSendCommand = new DelegateCommand(() => Sender?.Send(MessageToSend), () => Sender != null && Sender.IsOpen);
+            SenderOpenOrCloseCommand = new DelegateCommand(
                 () =>
                 {
                     if (Sender == null) return;
@@ -40,7 +57,7 @@ namespace LoongEgg.Udp.WpfDemo
                     else
                         Sender.Open();
 
-                    (SendCommand as DelegateCommand).RaiseCanExecuteChanged();
+                    (SenderSendCommand as DelegateCommand).RaiseCanExecuteChanged();
                 },
                 () =>
                 {
@@ -54,7 +71,28 @@ namespace LoongEgg.Udp.WpfDemo
                         return Sender.CanOpen;
                     }
                 });
-
+            ListenerOpenOrCloseCommand = new DelegateCommand(
+                () =>
+                {
+                    if (Listener == null) return;
+                    if (Listener.IsOpen)
+                        Listener.Close();
+                    else
+                        Listener.Open();
+                    (ListenerOpenOrCloseCommand as DelegateCommand).RaiseCanExecuteChanged();
+                },
+                () =>
+                {
+                    if (Listener == null) return false;
+                    if (Listener.IsOpen)
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        return Listener.CanOpen;
+                    }
+                });
         }
     }
 }

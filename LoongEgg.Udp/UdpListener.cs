@@ -96,11 +96,15 @@ namespace LoongEgg.Udp
                         Logger.Info($"Udp received hex[{Buffer.Length}] from [{_IpEndPointRemote.Address}: {_IpEndPointRemote.Port}]: {Buffer.ToHexString(' ')}");
                         Logger.Info($"Udp received msg[{Buffer.Length}] from [{_IpEndPointRemote.Address}: {_IpEndPointRemote.Port}]: {Encoding.UTF8.GetString(Buffer)}");
                     }
-                    Received?.Invoke(this, new ReceiveEventArgs(Buffer));
+                    Received?.Invoke(this, new ReceiveEventArgs(Buffer, _IpEndPointRemote));
                 } while (IsOpen);
             }
             catch (Exception ex)
             {
+                if (LogEnabled)
+                {
+                    Logger.Erro($"Udp listener open error: {ex.Message}"); 
+                }
                 throw ex;
             }
             finally
