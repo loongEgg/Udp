@@ -12,6 +12,9 @@
     FontFamily="Consolas"
     FontSize="22"
     mc:Ignorable="d">
+    <Window.Resources>
+        <SolidColorBrush x:Key="Foreground.On" Color="Green" />
+    </Window.Resources>
     <Grid Margin="2" d:DataContext="{x:Static local:MainViewModel.Singleton}">
         <Grid.ColumnDefinitions>
             <ColumnDefinition />
@@ -26,11 +29,20 @@
             </Grid.RowDefinitions>
             <StackPanel>
                 <TextBlock Text="远程" />
-                <local:ParameterBox Label="IP:" Value="{Binding Sender.IpRemote}" />
-                <local:ParameterBox Label="Port:" Value="{Binding Sender.PortRemote}" />
+                <local:ParameterBox
+                    Editable="{Binding Sender.IsOpen, Converter={cvt:BoolReverseConverter}}"
+                    Label="IP:"
+                    Value="{Binding Sender.IpRemote, Mode=TwoWay}" />
+                <local:ParameterBox
+                    Editable="{Binding Sender.IsOpen, Converter={cvt:BoolReverseConverter}}"
+                    Label="Port:"
+                    Value="{Binding Sender.PortRemote, Mode=TwoWay}" />
 
                 <TextBlock Margin="0,20,0,0" Text="本地" />
-                <local:ParameterBox Label="IP:" Value="{Binding Sender.IpLocal}" />
+                <local:ParameterBox
+                    Editable="False"
+                    Label="IP:"
+                    Value="{Binding Sender.IpLocal}" />
 
             </StackPanel>
 
@@ -46,13 +58,15 @@
                         Height="30"
                         HorizontalAlignment="Left"
                         Command="{Binding SenderOpenOrCloseCommand}"
-                        Content="{Binding Sender.IsOpen, Converter={cvt:FalseToOpenStringConverter}}" />
+                        Content="Open"
+                        Foreground="{Binding Sender.IsOpen, Converter={cvt:TrueToBrushConverter}, ConverterParameter={StaticResource Foreground.On}}" />
                     <Button
                         Width="120"
                         Height="30"
                         HorizontalAlignment="Right"
                         Command="{Binding SenderSendCommand}"
-                        Content="Send" />
+                        Content="Send"
+                        Foreground="{Binding Sender.IsOpen, Converter={cvt:TrueToBrushConverter}, ConverterParameter={StaticResource Foreground.On}}" />
                 </Grid>
             </Grid>
         </Grid>
@@ -65,11 +79,20 @@
             </Grid.RowDefinitions>
             <StackPanel>
                 <TextBlock Text="远程" />
-                <local:ParameterBox Label="IP:" Value="{Binding Listener.IpRemote}" />
-                <local:ParameterBox Label="Port:" Value="{Binding Listener.PortRemote}" />
+                <local:ParameterBox
+                    Editable="{Binding Listener.IsOpen, Converter={cvt:BoolReverseConverter}}"
+                    Label="IP:"
+                    Value="{Binding Listener.IpRemote, Mode=TwoWay}" />
+                <local:ParameterBox
+                    Editable="{Binding Listener.IsOpen, Converter={cvt:BoolReverseConverter}}"
+                    Label="Port:"
+                    Value="{Binding Listener.PortRemote, Mode=TwoWay}" />
 
                 <TextBlock Margin="0,20,0,0" Text="本地" />
-                <local:ParameterBox Label="IP:" Value="{Binding Listener.IpLocal}" />
+                <local:ParameterBox
+                    Editable="False"
+                    Label="IP:"
+                    Value="{Binding Listener.IpLocal}" />
 
             </StackPanel>
 
@@ -85,7 +108,8 @@
                         Height="30"
                         HorizontalAlignment="Left"
                         Command="{Binding ListenerOpenOrCloseCommand}"
-                        Content="{Binding Listener.IsOpen, Converter={cvt:FalseToOpenStringConverter}}" />
+                        Content="Open"
+                        Foreground="{Binding Listener.IsOpen, Converter={cvt:TrueToBrushConverter}, ConverterParameter={StaticResource Foreground.On}}" />
 
                 </Grid>
             </Grid>

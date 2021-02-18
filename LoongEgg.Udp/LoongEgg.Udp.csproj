@@ -6,8 +6,8 @@
     <Authors>LoongEgg</Authors>
     <Description>Bindable UDP Client can used in WPF as ViewModel of MVVM. See demo in github reposity</Description>
     <Copyright>LoongEgg</Copyright>
-    <PackageReleaseNotes>Bug fix:
-  1.Fix the UdpSender Bug: Do not assign the IsOpen property to false when closed</PackageReleaseNotes>
+    <PackageReleaseNotes>Enhancement:
+  1.ReceiveEventArgs add properties: Ip, and Port</PackageReleaseNotes>
     <AssemblyVersion>0.1.2.0</AssemblyVersion>
     <FileVersion>0.1.2.0</FileVersion>
     <Version>0.1.2</Version>

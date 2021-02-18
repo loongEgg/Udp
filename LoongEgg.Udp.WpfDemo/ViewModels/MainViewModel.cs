@@ -28,14 +28,14 @@ namespace LoongEgg.Udp.WpfDemo
             set { SetProperty(ref _MessageToSend, value); }
         }
         private string _MessageToSend = string.Empty;
-         
+
         public string MessageReceived
         {
             get { return _MessageReceived; }
             set { SetProperty(ref _MessageReceived, value); }
         }
         private string _MessageReceived = string.Empty;
-         
+
         public ICommand SenderSendCommand { get; }
         public ICommand SenderOpenOrCloseCommand { get; }
         public ICommand ListenerOpenOrCloseCommand { get; }
@@ -45,7 +45,7 @@ namespace LoongEgg.Udp.WpfDemo
             Listener = new UdpListener();
             Sender = new UdpSender();
 
-            Listener.Received += (s, e) => MessageReceived = e.Message;
+            Listener.Received += (s, e) => MessageReceived = $"{e.Ip}: {e.Port} > {e.Message}";
 
             SenderSendCommand = new DelegateCommand(() => Sender?.Send(MessageToSend), () => Sender != null && Sender.IsOpen);
             SenderOpenOrCloseCommand = new DelegateCommand(

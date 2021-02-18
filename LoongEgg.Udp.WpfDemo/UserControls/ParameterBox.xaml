@@ -24,6 +24,7 @@
             Grid.Column="1"
             Margin="2"
             VerticalAlignment="Center"
+            IsEnabled="{Binding Editable}"
             Background="{Binding Background}"
             Text="{Binding Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
         <TextBlock
