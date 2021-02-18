@@ -13,6 +13,7 @@
     <Version>0.1.2</Version>
     <RepositoryUrl>https://github.com/loongEgg/Udp.git</RepositoryUrl>
     <PackageProjectUrl>https://github.com/loongEgg/Udp</PackageProjectUrl>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|netcoreapp3.1|AnyCPU'">
@@ -28,6 +29,13 @@
     <PackageReference Include="LoongEgg.Core" Version="1.0.0" />
     <PackageReference Include="LoongEgg.Log" Version="0.1.1" />
     <PackageReference Include="LoongEgg.SharpExtensions" Version="1.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\LICENSE">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
   </ItemGroup>
 
 </Project>
